@@ -6,9 +6,11 @@
 
     <changeSet author="leonardo.oliveira" id="20200910093800-1" labels="Criação da tabela de usuario">
 
+        <createSequence sequenceName="SQ_USUARIO"/>
+
         <createTable tableName="TB_USUARIO" >
 
-            <column name="ID_USUARIO" type="BIGINT">
+            <column name="ID_USUARIO" type="BIGINT" >
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="DS_LOGIN" type="VARCHAR(50)" />
