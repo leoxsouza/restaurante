@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet author="leonardo.oliveira" id="20200910093800-1" labels="Criação da tabela de usuario">
+
+        <createTable tableName="TB_USUARIO" >
+
+            <column name="ID_USUARIO" type="BIGINT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="DS_LOGIN" type="VARCHAR(50)" />
+            <column name="DS_SENHA" type="VARCHAR(50)" />
+            <column name="DS_NOME" type="VARCHAR(50)" />
+
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
