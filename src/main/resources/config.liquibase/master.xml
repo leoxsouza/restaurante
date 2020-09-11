@@ -5,4 +5,5 @@
 
     <include file="config.liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
     <include file="config.liquibase/changelog/20200910093800_tb_usuario.xml" relativeToChangelogFile="false"/>
+    <include file="config.liquibase/changelog/20200911100900_tb_role.xml" relativeToChangelogFile="false"/>
 </databaseChangeLog>

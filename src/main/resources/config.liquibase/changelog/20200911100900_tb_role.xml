@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet author="leonardo.oliveira" id="20200911100900-1" labels="Criação da tabela Roles">
+
+        <createSequence sequenceName="SQ_ROLE"/>
+
+        <createTable tableName="TB_ROLE" >
+            <column name="ID_ROLE" type="BIGINT" >
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="DS_ROLE" type="VARCHAR(100)" />
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20200911100900-2" author="leonardo.oliveira">
+        <createTable tableName="RL_USUARIO_ROLE" remarks="Tabela de relação de Usuarios e Roles">
+            <column name="ID_USUARIO" type="BIGINT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="ID_ROLE" type="BIGINT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="leonardo.oliveira" id="20200911100900-3">
+        <addForeignKeyConstraint baseTableName="RL_USUARIO_ROLE"
+                                 baseColumnNames="ID_USUARIO"
+                                 constraintName="FK_TB_USUARIO_ROLE"
+                                 referencedTableName="TB_USUARIO"
+                                 referencedColumnNames="ID_USUARIO"
+        />
+
+        <addForeignKeyConstraint baseTableName="RL_USUARIO_ROLE"
+                                 baseColumnNames="ID_ROLE"
+                                 constraintName="FK_TB_ROLE_USUARIO"
+                                 referencedTableName="TB_ROLE"
+                                 referencedColumnNames="ID_ROLE"
+        />
+    </changeSet>
+
+</databaseChangeLog>

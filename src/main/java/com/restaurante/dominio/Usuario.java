@@ -12,13 +12,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
-import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import java.util.Collection;
 import java.util.List;
 
@@ -46,12 +42,12 @@ public class Usuario implements UserDetails {
     @Column(name = "DS_NOME")
     private String nome;
 
-//    @OneToMany(fetch = FetchType.EAGER)
-//    private List<Role> roles;
+    @OneToMany(fetch = FetchType.EAGER)
+    private List<UsuariosRole> roles;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return this.roles;
     }
 
     @Override
