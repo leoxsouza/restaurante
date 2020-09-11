@@ -1,4 +1,4 @@
-package com.restaurante.dominio;
+package com.restaurante.domain;
 
 import lombok.Getter;
 import lombok.Setter;

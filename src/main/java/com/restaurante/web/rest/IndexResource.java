@@ -1,7 +1,7 @@
 package com.restaurante.web.rest;
 
-import com.restaurante.dominio.Usuario;
-import com.restaurante.repositorio.UsuarioRepository;
+import com.restaurante.domain.Usuario;
+import com.restaurante.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

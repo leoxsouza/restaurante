@@ -1,4 +1,4 @@
-package com.restaurante.dominio;
+package com.restaurante.domain;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -42,7 +42,7 @@ public class Usuario implements UserDetails {
     @Column(name = "DS_NOME")
     private String nome;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "id.usuario", fetch = FetchType.EAGER)
     private List<UsuariosRole> roles;
 
     @Override

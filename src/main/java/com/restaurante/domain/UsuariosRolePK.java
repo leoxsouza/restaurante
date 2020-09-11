@@ -1,4 +1,4 @@
-package com.restaurante.dominio;
+package com.restaurante.domain;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

@@ -8,8 +8,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @SpringBootApplication
-@EntityScan(basePackages = {"com.restaurante.dominio"})
-@EnableJpaRepositories(basePackages = {"com.restaurante.repositorio"})
+@EntityScan(basePackages = {"com.restaurante.domain"})
+@EnableJpaRepositories(basePackages = {"com.restaurante.repository"})
 @EnableTransactionManagement
 @EnableWebMvc
 public class RestauranteApplication {
