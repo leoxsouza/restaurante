@@ -10,12 +10,18 @@
 
         <createTable tableName="TB_USUARIO" >
 
-            <column name="ID_USUARIO" type="BIGINT" >
+            <column name="ID_USUARIO" type="BIGINT">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="DS_LOGIN" type="VARCHAR(50)" />
-            <column name="DS_SENHA" type="VARCHAR(50)" />
-            <column name="DS_NOME" type="VARCHAR(50)" />
+            <column name="DS_LOGIN" type="VARCHAR(200)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="DS_SENHA" type="VARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DS_NOME" type="VARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
 
         </createTable>
     </changeSet>

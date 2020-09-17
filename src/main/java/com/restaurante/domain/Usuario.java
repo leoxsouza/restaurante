@@ -33,13 +33,13 @@ public class Usuario implements UserDetails {
     @Column(name = "ID_USUARIO")
     private Long id;
 
-    @Column(name = "DS_LOGIN")
+    @Column(name = "DS_LOGIN", nullable = false, unique = true)
     private String login;
 
-    @Column(name = "DS_SENHA")
+    @Column(name = "DS_SENHA", nullable = false)
     private String senha;
 
-    @Column(name = "DS_NOME")
+    @Column(name = "DS_NOME", nullable = false)
     private String nome;
 
     @OneToMany(mappedBy = "id.usuario", fetch = FetchType.EAGER)

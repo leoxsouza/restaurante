@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Date;
 
 @Service
@@ -26,7 +27,7 @@ public class JWTTokenAutenticacaoService {
 
     private static final String HEADER_STRING = "Authorization";
 
-    public void addAuthentication(HttpServletResponse response, String username) throws Exception {
+    public void addAuthentication(HttpServletResponse response, String username) throws IOException {
 
         String jwt = Jwts.builder()
                 .setSubject(username)
