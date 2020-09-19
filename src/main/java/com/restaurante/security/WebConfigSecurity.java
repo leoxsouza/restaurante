@@ -3,6 +3,7 @@ package com.restaurante.security;
 import com.restaurante.service.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -25,6 +26,7 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter {
                 .disable().authorizeRequests() /* Ativando permissão para página inicial do sistema */
                 .antMatchers("/").permitAll() /* Ativando permissão para página inicial do sistema */
                 .antMatchers("/index").permitAll() /* Ativando permissão para página inicial do sistema */
+                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .anyRequest().authenticated().and().logout().logoutSuccessUrl("/index") /* URL de logout - Redireciona após logout */
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout")) /* mapeia Url de logout e invalida o usuario */
                 .and().addFilterBefore(new JWTLoginFilter("/login", authenticationManager()), UsernamePasswordAuthenticationFilter.class)

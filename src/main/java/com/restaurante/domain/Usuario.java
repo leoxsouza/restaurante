@@ -45,6 +45,9 @@ public class Usuario implements UserDetails {
     @OneToMany(mappedBy = "id.usuario", fetch = FetchType.EAGER)
     private List<UsuariosRole> roles;
 
+    @Column(name = "DS_TOKEN")
+    private String token;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.roles;

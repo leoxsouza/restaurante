@@ -22,6 +22,7 @@
             <column name="DS_NOME" type="VARCHAR(200)">
                 <constraints nullable="false"/>
             </column>
+            <column name="DS_TOKEN" type="VARCHAR(200)" />
 
         </createTable>
     </changeSet>

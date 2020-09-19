@@ -2,6 +2,7 @@ package com.restaurante.web.rest;
 
 import com.restaurante.domain.Usuario;
 import com.restaurante.repository.UsuarioRepository;
+import com.restaurante.service.dto.UsuarioDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -21,11 +22,11 @@ public class IndexResource {
     private final UsuarioRepository usuarioRepository;
 
     @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Usuario> init() {
+    public ResponseEntity<UsuarioDTO> init() {
 
         Usuario usuario = usuarioRepository.findAll().get(0);
 
-        return new ResponseEntity<>(usuario, HttpStatus.OK);
+        return new ResponseEntity<>(new UsuarioDTO(usuario), HttpStatus.OK);
     }
 
     @PostMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
