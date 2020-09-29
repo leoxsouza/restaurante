@@ -17,6 +17,8 @@ public class JWTApiAutenticacaoFilter extends GenericFilterBean {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+        liberaCors((HttpServletResponse) servletResponse);
+
         /* Estabelece autenticação para requisição*/
         Authentication authentication = new JWTTokenAutenticacaoService().getAuthentication((HttpServletRequest) servletRequest, (HttpServletResponse) servletResponse);
 
@@ -26,5 +28,24 @@ public class JWTApiAutenticacaoFilter extends GenericFilterBean {
         /* Continua o processo */
         filterChain.doFilter(servletRequest, servletResponse);
 
+    }
+
+    private void liberaCors(HttpServletResponse servletResponse) {
+        if(servletResponse.getHeader("Access-Control-Allow-Origin") == null)
+        {
+            servletResponse.addHeader("Access-Control-Allow-Origin", "*");
+        }
+        if(servletResponse.getHeader("Access-Control-Allow-Headers") == null)
+        {
+            servletResponse.addHeader("Access-Control-Allow-Headers", "*");
+        }
+        if(servletResponse.getHeader("Access-Control-Allow-Methods") == null)
+        {
+            servletResponse.addHeader("Access-Control-Allow-Methods", "GET, OPTIONS, HEAD, PUT, POST");
+        }
+        if(servletResponse.getHeader("Access-Control-Request-Headers") == null)
+        {
+            servletResponse.addHeader("Access-Control-Request-Headers", "*");
+        }
     }
 }
