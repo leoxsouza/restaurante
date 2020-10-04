@@ -1,9 +1,12 @@
 package com.restaurante.service;
 
+import com.restaurante.domain.Usuario;
 import com.restaurante.repository.UsuarioRepository;
 import com.restaurante.service.dto.UsuarioDTO;
 import com.restaurante.service.mapper.UsuarioMapper;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,5 +34,14 @@ public class UsuarioService {
 
     public void excluirUsuario(Long idUsuario) {
         usuarioRepository.deleteById(idUsuario);
+    }
+
+    public Usuario cadastrar(Usuario usuario) throws Exception {
+        usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenha()));
+        if (usuario.getId() == null && usuarioRepository.existsByLoginIgnoreCase(usuario.getLogin())) {
+            //TODO criar parametrized exception
+            throw new Exception("Usuário já existe!");
+        }
+        return usuarioRepository.save(usuario);
     }
 }

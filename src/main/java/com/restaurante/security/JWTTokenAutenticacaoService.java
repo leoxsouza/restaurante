@@ -3,9 +3,11 @@ package com.restaurante.security;
 import com.restaurante.ApplicationContextLoad;
 import com.restaurante.domain.Usuario;
 import com.restaurante.repository.UsuarioRepository;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
@@ -14,93 +16,62 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
+import java.util.HashMap;
 
 @Service
 @Component
 public class JWTTokenAutenticacaoService {
 
-    private static final long EXPIRATION_TIME = 172800000;
-
     private static final String SECRET = "DeliciasRest";
 
-    private static final String TOKEN_PREFIX = "Bearer";
+    @Value("${security.jwt.chave-assinatura}")
+    private String chaveAssinatura;
 
-    private static final String HEADER_STRING = "Authorization";
+    @Value("${security.jwt.expiracao}")
+    private String expiracao;
 
-    public void addAuthentication(HttpServletResponse response, String username) throws IOException {
 
-        String jwt = Jwts.builder()
-                .setSubject(username)
-                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
-                .signWith(SignatureAlgorithm.HS512, SECRET).compact();
-
-        String token = TOKEN_PREFIX + " " + jwt;
-
-        response.addHeader(HEADER_STRING, token);
-
-        /* Liberando resposta para clientes web */
-        liberarCors(response);
-
-        response.getWriter().write("{\"Authorization\": \"" +token+ "\"}");
-
+    private Claims obterClaims(String token) throws ExpiredJwtException {
+        return Jwts
+                .parser()
+                .setSigningKey(SECRET)
+                .parseClaimsJws(token)
+                .getBody();
     }
 
-    public Authentication getAuthentication(HttpServletRequest request, HttpServletResponse response) {
-
-        String token = request.getHeader(HEADER_STRING);
-
+    public boolean tokenValido(String token) {
         try {
+            Claims claims = obterClaims(token);
 
-            if (token != null) {
+            Date dataExpiracao = claims.getExpiration();
+            LocalDateTime data = dataExpiracao.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
 
-                String tokenLimpo = token.replace(TOKEN_PREFIX, "").trim();
+            return !LocalDateTime.now().isAfter(data);
 
-                String user = Jwts.parser().setSigningKey(SECRET)
-                        .parseClaimsJws(tokenLimpo)
-                        .getBody().getSubject();
-
-                if (user != null) {
-                    Usuario usuario = ApplicationContextLoad.getApplicationContext()
-                            .getBean(UsuarioRepository.class).findUsuarioByLogin(user);
-
-                    if (usuario != null) {
-                        //remover coluna de token da tabela de usuario
-//                    if (tokenLimpo.equalsIgnoreCase(usuario.getToken())) {
-                        return new UsernamePasswordAuthenticationToken(usuario.getLogin(), usuario.getSenha(), usuario.getAuthorities());
-//                    }
-                    }
-                }
-            }
-        } catch (ExpiredJwtException e) {
-            try {
-                response.getOutputStream().println("Seu TOKEN está expirado, faça o login ou informe um novo token");
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
-        }
-
-        liberarCors(response);
-
-        return null;
-    }
-
-    private void liberarCors(HttpServletResponse response) {
-        if (response.getHeader("Access-Control-Allow-Origin") == null) {
-            response.addHeader("Access-Control-Allow-Origin", "*");
-        }
-
-        if (response.getHeader("Access-Control-Allow-Headers") == null) {
-            response.addHeader("Access-Control-Allow-Header", "*");
-        }
-
-        if (response.getHeader("Access-Control-Request-Headers") == null) {
-            response.addHeader("Access-Control-Request-Headers", "*");
-        }
-
-        if (response.getHeader("Access-Control-Allow-Methods") == null) {
-            response.addHeader("Access-Control-Allow-Methods", "*");
+        } catch (Exception e) {
+            return false;
         }
     }
 
+    public String obterLoginUsuario(String token) throws ExpiredJwtException {
+        return (String) obterClaims(token).getSubject();
+    }
+
+    public String gerarToken(Usuario usuario) {
+        long expString = Long.parseLong(expiracao);
+        LocalDateTime dataHoraExpiracao = LocalDateTime.now().plusMinutes(expString);
+        Instant instant = dataHoraExpiracao.atZone(ZoneId.systemDefault()).toInstant();
+        Date data = Date.from(instant);
+
+        return Jwts
+                .builder()
+                .setSubject(usuario.getLogin())
+                .setExpiration(data)
+                .signWith(SignatureAlgorithm.HS512, chaveAssinatura)
+                .compact();
+    }
 }
