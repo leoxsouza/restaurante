@@ -15,8 +15,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -46,7 +44,7 @@ public class IndexResource {
     }
 
     @PostMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Usuario> cadastrar(@RequestBody Usuario usuario) throws Exception {
+    public ResponseEntity<Usuario> cadastrar(@RequestBody UsuarioDTO usuario) throws Exception {
         return new ResponseEntity<>(usuarioService.cadastrar(usuario), HttpStatus.OK);
     }
 

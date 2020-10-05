@@ -1,5 +1,6 @@
 package com.restaurante.web.rest;
 
+import com.restaurante.exception.SenhaInvalidaException;
 import org.hibernate.exception.ConstraintViolationException;
 import org.postgresql.util.PSQLException;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -22,7 +23,7 @@ import java.util.List;
 public class ControleExcecoes extends ResponseEntityExceptionHandler {
 
     /** Interceptar erros mais comum no projeto **/
-    @ExceptionHandler({Exception.class, RuntimeException.class, Throwable.class})
+    @ExceptionHandler({Exception.class, RuntimeException.class, Throwable.class, SenhaInvalidaException.class})
     @Override
     protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body, HttpHeaders headers, HttpStatus status, WebRequest request) {
 
@@ -33,6 +34,8 @@ public class ControleExcecoes extends ResponseEntityExceptionHandler {
             for (ObjectError objectError : list) {
                 msg.append(objectError.getDefaultMessage()).append("\n");
             }
+        } else if (ex instanceof SenhaInvalidaException) {
+            msg = new StringBuilder("login.existente");
         } else {
             msg = new StringBuilder(ex.getMessage());
         }
