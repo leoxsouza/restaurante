@@ -5,7 +5,7 @@ import com.restaurante.service.dto.CredenciaisDTO;
 import com.restaurante.service.dto.UsuarioDTO;
 import org.mapstruct.Mapper;
 
-@Mapper(componentModel = "spring", uses = {RolesMapper.class})
+@Mapper(componentModel = "spring", uses = {RolesMapper.class, PessoaMapper.class})
 public interface UsuarioMapper {
 
     Usuario toEntity(UsuarioDTO dto);

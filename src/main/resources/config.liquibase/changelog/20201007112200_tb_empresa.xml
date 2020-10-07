@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet author="leonardo.oliveira" id="20201007112200-1" labels="Criação da tabela Pessoa">
+
+        <createSequence sequenceName="SQ_PESSOA"/>
+
+        <createTable tableName="TB_PESSOA" >
+
+            <column name="ID_PESSOA" type="BIGINT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="TP_PESSOA" type="VARCHAR(2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NU_CNPJ" type="VARCHAR(14)" />
+            <column name="NU_CPF" type="VARCHAR(11)" />
+            <column name="DS_NOME" type="VARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+    </changeSet>
+
+    <changeSet author="leonardo.oliveira" id="20201007112200-2">
+        <addForeignKeyConstraint
+                constraintName="FK_TB_PESSOA_TB_USUARIO"
+                baseColumnNames="ID_PESSOA" baseTableName="TB_USUARIO"
+                referencedColumnNames="ID_PESSOA" referencedTableName="TB_PESSOA"
+        />
+    </changeSet>
+
+</databaseChangeLog>
