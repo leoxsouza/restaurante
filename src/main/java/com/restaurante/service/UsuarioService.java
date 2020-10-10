@@ -66,4 +66,8 @@ public class UsuarioService {
             throw new SenhaInvalidaException();
         }
     }
+
+    public Usuario findByLogin(String login) {
+        return usuarioRepository.findUsuarioByLogin(login);
+    }
 }

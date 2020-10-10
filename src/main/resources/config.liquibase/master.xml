@@ -6,6 +6,7 @@
     <include file="config.liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
     <include file="config.liquibase/changelog/20200910093800_tb_usuario.xml" relativeToChangelogFile="false"/>
     <include file="config.liquibase/changelog/20200911100900_tb_role.xml" relativeToChangelogFile="false"/>
-    <include file="config.liquibase/changelog/20201004233200_tb_divida.xml" relativeToChangelogFile="false"/>
     <include file="config.liquibase/changelog/20201007112200_tb_empresa.xml" relativeToChangelogFile="false"/>
+    <include file="config.liquibase/changelog/20201010090300_tb_compras_cliente.xml" relativeToChangelogFile="false"/>
+    <include file="config.liquibase/changelog/20201010091800_tb_divida_cliente.xml" relativeToChangelogFile="false"/>
 </databaseChangeLog>

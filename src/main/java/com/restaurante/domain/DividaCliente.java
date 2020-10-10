@@ -6,17 +6,16 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.io.Serializable;
-import java.util.Set;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -36,11 +35,15 @@ public class DividaCliente implements Serializable {
     @Column(name = "VL_TOTAL", nullable = false)
     private Double total;
 
-    @OneToMany(mappedBy = "dividaCliente", fetch = FetchType.EAGER)
-    private Set<Divida> dividas;
+    @Column(name = "DH_ULTIMO_PAGAMENTO")
+    private LocalDateTime dataUltimoPagamento;
 
     @OneToOne
-    @JoinColumn(name = "ID_USUARIO")
-    private Usuario usuario;
+    @JoinColumn(name = "ID_USUARIO_CLIENTE", nullable = false)
+    private Usuario usuarioCliente;
+
+    @ManyToOne
+    @JoinColumn(name = "ID_USUARIO_EMPRESA", nullable = false)
+    private Usuario usuarioEmpresa;
 
 }
