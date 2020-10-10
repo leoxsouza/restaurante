@@ -3,10 +3,14 @@ package com.restaurante.service;
 import com.restaurante.domain.DividaCliente;
 import com.restaurante.repository.DividaClienteRepository;
 import com.restaurante.service.dto.ComprasClienteDTO;
+import com.restaurante.service.dto.DividaClienteDTO;
+import com.restaurante.service.dto.QuitarDividaDTO;
 import com.restaurante.service.mapper.DividaClienteMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
 
 @Service
 @Transactional
@@ -20,13 +24,13 @@ public class DividaClienteService implements UsuarioBase {
     private final UsuarioService usuarioService;
 
     public void cadastrar(ComprasClienteDTO comprasClienteDTO) {
-        DividaCliente dividaCliente = dividaClienteRepository.findByUsuarioClienteId(comprasClienteDTO.getIdUsuarioCliente());
+        DividaCliente dividaCliente = findByClienteId(comprasClienteDTO.getIdUsuarioCliente());
         processamentoSalvar(dividaCliente, comprasClienteDTO);
     }
 
     private void processamentoSalvar(DividaCliente dividaCliente, ComprasClienteDTO comprasClienteDTO) {
         if (dividaCliente == null) {
-            dividaCliente = dividaClienteMapper.toEntity(comprasClienteDTO);
+            dividaCliente = dividaClienteMapper.toEntityFromCompras(comprasClienteDTO);
         } else {
             dividaCliente.setTotal(dividaCliente.getTotal() + comprasClienteDTO.getValorCompra());
         }
@@ -36,4 +40,27 @@ public class DividaClienteService implements UsuarioBase {
         dividaClienteRepository.save(dividaCliente);
     }
 
+    public DividaClienteDTO quitarDivida(QuitarDividaDTO quitarDividaDTO) {
+        DividaCliente dividaCliente = findByClienteId(quitarDividaDTO.getIdUsuarioCliente());
+
+        if (dividaCliente != null) {
+            verificaValor(dividaCliente, quitarDividaDTO);
+            dividaCliente.setTotal(dividaCliente.getTotal() - quitarDividaDTO.getValorQuitado());
+            dividaCliente.setDataUltimoPagamento(LocalDateTime.now());
+            dividaClienteRepository.save(dividaCliente);
+        }
+
+        return dividaClienteMapper.toDto(dividaCliente);
+
+    }
+
+    private void verificaValor(DividaCliente dividaCliente, QuitarDividaDTO quitarDividaDTO) {
+        if (quitarDividaDTO.getValorQuitado() > dividaCliente.getTotal()) {
+            //TODO lançar uma exceção
+        }
+    }
+
+    public DividaCliente findByClienteId(Long clienteId) {
+        return dividaClienteRepository.findByUsuarioClienteId(clienteId);
+    }
 }

@@ -10,6 +10,7 @@ import com.restaurante.service.dto.TokenDTO;
 import com.restaurante.service.dto.UsuarioDTO;
 import com.restaurante.service.mapper.UsuarioMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/api/usuario")
 @RequiredArgsConstructor
+@Slf4j
 public class IndexResource {
 
     private final UsuarioService usuarioService;
@@ -40,21 +42,25 @@ public class IndexResource {
 
     @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<UsuarioDTO>> listarUsuarios() {
+        log.info("Request para listar todos usuários");
         return new ResponseEntity<>(usuarioService.listarUsuarios(), HttpStatus.OK);
     }
 
     @PostMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Usuario> cadastrar(@RequestBody UsuarioDTO usuario) throws Exception {
+        log.info("Request para cadastrar usuário: {}", usuario.toString());
         return new ResponseEntity<>(usuarioService.cadastrar(usuario), HttpStatus.OK);
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UsuarioDTO> findOne(@PathVariable Long id) {
+        log.info("Request para buscar um usuário: {}", id);
         return new ResponseEntity<>(usuarioService.findOne(id), HttpStatus.OK);
     }
 
     @GetMapping(value = "/deletar/{id}")
     public ResponseEntity<Long> excluirUsuario(@PathVariable Long id) {
+        log.info("Request para excluir um usuário: {}", id);
         usuarioService.excluirUsuario(id);
 
         return new ResponseEntity<>(id, HttpStatus.OK);
@@ -62,6 +68,7 @@ public class IndexResource {
 
     @PostMapping("/login")
     public TokenDTO autenticar(@RequestBody CredenciaisDTO credenciais) {
+        log.info("Request para fazer o login");
         try {
             Usuario usuario = usuarioMapper.toEntity(credenciais);
             UserDetails usuarioAutenticado = userDetailsService.autenticar(usuario);
