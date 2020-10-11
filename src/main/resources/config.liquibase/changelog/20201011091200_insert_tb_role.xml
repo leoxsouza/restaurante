@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet author="leonardo.oliveira" id="20201011091200-1">
+
+        <sql>
+            INSERT INTO TB_ROLE (ID_ROLE, DS_ROLE) VALUES (1, 'ADMIN');
+            INSERT INTO TB_ROLE (ID_ROLE, DS_ROLE) VALUES (2, 'EMPRESA');
+            INSERT INTO TB_ROLE (ID_ROLE, DS_ROLE) VALUES (3, 'CLIENTE');
+        </sql>
+
+    </changeSet>
+
+</databaseChangeLog>

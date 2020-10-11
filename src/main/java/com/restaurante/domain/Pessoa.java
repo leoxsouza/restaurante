@@ -12,6 +12,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.io.Serializable;
@@ -27,7 +29,7 @@ public class Pessoa implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SQ_PESSOA")
-    @SequenceGenerator(name = "SQ_PESSOA", sequenceName = "SQ_PESSOA", allocationSize = 1)
+    @SequenceGenerator(name = "SQ_PESSOA", sequenceName = "SQ_PESSOA", allocationSize = 1, initialValue = 2)
     @Column(name = "ID_PESSOA")
     private Long id;
 
@@ -35,13 +37,14 @@ public class Pessoa implements Serializable {
     @Column(name = "TP_PESSOA", nullable = false)
     private TipoPessoaEnum tipoPessoa;
 
-    @Column(name = "NU_CNPJ")
-    private String cnpj;
-
     @Column(name = "NU_CPF")
     private String cpf;
 
     @Column(name = "DS_NOME", nullable = false)
     private String nome;
+
+    @ManyToOne
+    @JoinColumn(name = "ID_EMPRESA")
+    private Empresa empresa;
 
 }

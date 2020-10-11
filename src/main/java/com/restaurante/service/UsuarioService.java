@@ -54,6 +54,8 @@ public class UsuarioService {
     }
 
     private void salvarRoles(UsuarioDTO usuarioDto, Usuario usuario) {
+        usuarioDto.getPessoa().getTipoPessoa().setRole(usuarioDto);
+
         UsuariosRole usuariosRole = new UsuariosRole();
         UsuariosRolePK usuariosRolePK = new UsuariosRolePK(usuario, rolesMapper.toEntityRoles(usuarioDto.getRole()));
         usuariosRole.setId(usuariosRolePK);
@@ -65,6 +67,8 @@ public class UsuarioService {
             //TODO criar parametrized exception
             throw new SenhaInvalidaException();
         }
+
+        // TODO verificar Cpf
     }
 
     public Usuario findByLogin(String login) {

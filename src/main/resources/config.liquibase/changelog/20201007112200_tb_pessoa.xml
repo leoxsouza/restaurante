@@ -6,7 +6,7 @@
 
     <changeSet author="leonardo.oliveira" id="20201007112200-1" labels="Criação da tabela Pessoa">
 
-        <createSequence sequenceName="SQ_PESSOA"/>
+        <createSequence sequenceName="SQ_PESSOA" startValue="2"/>
 
         <createTable tableName="TB_PESSOA" >
 
@@ -16,11 +16,11 @@
             <column name="TP_PESSOA" type="VARCHAR(2)">
                 <constraints nullable="false"/>
             </column>
-            <column name="NU_CNPJ" type="VARCHAR(14)" />
             <column name="NU_CPF" type="VARCHAR(11)" />
             <column name="DS_NOME" type="VARCHAR(200)">
                 <constraints nullable="false"/>
             </column>
+            <column name="ID_EMPRESA" type="BIGINT" />
 
         </createTable>
     </changeSet>
@@ -30,6 +30,12 @@
                 constraintName="FK_TB_PESSOA_TB_USUARIO"
                 baseColumnNames="ID_PESSOA" baseTableName="TB_USUARIO"
                 referencedColumnNames="ID_PESSOA" referencedTableName="TB_PESSOA"
+        />
+
+        <addForeignKeyConstraint
+                constraintName="FK_TB_EMPRESA_TB_USUARIO"
+                baseColumnNames="ID_EMPRESA" baseTableName="TB_PESSOA"
+                referencedColumnNames="ID_EMPRESA" referencedTableName="TB_EMPRESA"
         />
     </changeSet>
 

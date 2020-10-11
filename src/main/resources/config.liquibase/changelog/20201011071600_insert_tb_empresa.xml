@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet author="leonardo.oliveira" id="20201011071600-1">
+
+        <sql>
+            INSERT INTO TB_EMPRESA (ID_EMPRESA, NU_CNPJ, DS_NOME) VALUES (1, '76319354000165', 'Restaurante');
+            INSERT INTO TB_EMPRESA (ID_EMPRESA, NU_CNPJ, DS_NOME) VALUES (2, '57940029000170', 'Lanchonete');
+        </sql>
+
+    </changeSet>
+
+</databaseChangeLog>

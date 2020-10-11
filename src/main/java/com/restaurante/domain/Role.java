@@ -22,7 +22,7 @@ public class Role implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SQ_ROLE")
-    @SequenceGenerator(name = "SQ_ROLE")
+    @SequenceGenerator(name = "SQ_ROLE", initialValue = 4)
     @Column(name = "ID_ROLE")
     private Long id;
 

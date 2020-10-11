@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet author="leonardo.oliveira" id="20201011092000-1">
+
+        <sql>
+            INSERT INTO TB_PESSOA (ID_PESSOA, TP_PESSOA, NU_CPF, DS_NOME, ID_EMPRESA)
+            VALUES (1, 'PF', '11111111111', 'ADMIN', null);
+
+            INSERT INTO TB_USUARIO (ID_USUARIO, DS_LOGIN, DS_SENHA, DS_TOKEN, ID_PESSOA)
+            VALUES (1, 'admin', '$2a$10$LoiEo5WmIUlNugrhWIVRj.Hu17Bx3gUMS9yJqrB2W9NL.RqiumI5i', null, 1);
+
+            INSERT INTO RL_USUARIO_ROLE(ID_USUARIO, ID_ROLE) VALUES (1, 1);
+        </sql>
+
+    </changeSet>
+
+</databaseChangeLog>
