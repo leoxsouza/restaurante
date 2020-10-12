@@ -6,6 +6,7 @@ import com.restaurante.domain.UsuariosRolePK;
 import com.restaurante.exception.SenhaInvalidaException;
 import com.restaurante.repository.UsuarioRepository;
 import com.restaurante.repository.UsuariosRoleRepository;
+import com.restaurante.service.dto.DropDownDTO;
 import com.restaurante.service.dto.UsuarioDTO;
 import com.restaurante.service.mapper.RolesMapper;
 import com.restaurante.service.mapper.UsuarioMapper;
@@ -73,5 +74,13 @@ public class UsuarioService {
 
     public Usuario findByLogin(String login) {
         return usuarioRepository.findUsuarioByLogin(login);
+    }
+
+    public List<DropDownDTO> getClientesDropdown() {
+        return usuarioRepository.getClientesDropdown();
+    }
+
+    public Long getIdByLogin(String login) {
+        return usuarioRepository.getUsuarioByLogin(login);
     }
 }

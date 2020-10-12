@@ -6,6 +6,7 @@ import com.restaurante.security.JWTTokenAutenticacaoService;
 import com.restaurante.service.UserDetailsServiceImpl;
 import com.restaurante.service.UsuarioService;
 import com.restaurante.service.dto.CredenciaisDTO;
+import com.restaurante.service.dto.DropDownDTO;
 import com.restaurante.service.dto.TokenDTO;
 import com.restaurante.service.dto.UsuarioDTO;
 import com.restaurante.service.mapper.UsuarioMapper;
@@ -78,5 +79,11 @@ public class IndexResource {
         } catch (UsernameNotFoundException | SenhaInvalidaException e) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
         }
+    }
+
+    @GetMapping(value = "/clientes/dropdown", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<DropDownDTO>> getClientesDropdown() {
+        log.info("Request para buscar dropdown de clientes");
+        return new ResponseEntity<>(usuarioService.getClientesDropdown(), HttpStatus.OK);
     }
 }

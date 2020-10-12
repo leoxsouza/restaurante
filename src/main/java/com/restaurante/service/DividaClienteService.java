@@ -4,6 +4,7 @@ import com.restaurante.domain.DividaCliente;
 import com.restaurante.repository.DividaClienteRepository;
 import com.restaurante.service.dto.ComprasClienteDTO;
 import com.restaurante.service.dto.DividaClienteDTO;
+import com.restaurante.service.dto.DividaClienteListDTO;
 import com.restaurante.service.dto.QuitarDividaDTO;
 import com.restaurante.service.mapper.DividaClienteMapper;
 import lombok.AllArgsConstructor;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @Transactional
@@ -61,6 +63,14 @@ public class DividaClienteService implements UsuarioBase {
     }
 
     public DividaCliente findByClienteId(Long clienteId) {
+
+        //TODO Buscar tbm pelo usuarioEmpresa
+
         return dividaClienteRepository.findByUsuarioClienteId(clienteId);
+    }
+
+    public List<DividaClienteListDTO> listarDividas() {
+        Long idUsuarioLogado = usuarioService.getIdByLogin(getUsernameLogado());
+        return dividaClienteRepository.listarDividas(idUsuarioLogado);
     }
 }

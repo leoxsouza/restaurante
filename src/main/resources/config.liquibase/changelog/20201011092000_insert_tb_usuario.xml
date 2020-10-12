@@ -8,7 +8,7 @@
 
         <sql>
             INSERT INTO TB_PESSOA (ID_PESSOA, TP_PESSOA, NU_CPF, DS_NOME, ID_EMPRESA)
-            VALUES (1, 'PF', '11111111111', 'ADMIN', null);
+            VALUES (1, 'PJ', '11111111111', 'ADMIN', null);
 
             INSERT INTO TB_USUARIO (ID_USUARIO, DS_LOGIN, DS_SENHA, DS_TOKEN, ID_PESSOA)
             VALUES (1, 'admin', '$2a$10$LoiEo5WmIUlNugrhWIVRj.Hu17Bx3gUMS9yJqrB2W9NL.RqiumI5i', null, 1);
