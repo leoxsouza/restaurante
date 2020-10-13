@@ -12,9 +12,10 @@ import java.util.List;
 @Repository
 public interface DividaClienteRepository extends JpaRepository<DividaCliente, Long> {
 
-    DividaCliente findByUsuarioClienteId(Long usuarioClienteId);
+    DividaCliente findByUsuarioClienteIdAndUsuarioEmpresaPessoaEmpresaId(Long usuarioClienteId, Long empresaId);
 
-    @Query("SELECT new com.restaurante.service.dto.DividaClienteListDTO(d.id, d.total, d.usuarioCliente.pessoa.nome) FROM DividaCliente d " +
+    @Query("SELECT new com.restaurante.service.dto.DividaClienteListDTO(d.id, d.total, d.usuarioCliente.pessoa.nome, d.usuarioCliente.id) " +
+            "FROM DividaCliente d " +
             "WHERE d.usuarioEmpresa.id = :usuarioEmpresaId")
     List<DividaClienteListDTO> listarDividas(@Param("usuarioEmpresaId") Long usuarioEmpresaId);
 }

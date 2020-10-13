@@ -20,4 +20,6 @@ public class DividaClienteListDTO implements Serializable {
     private Double total;
 
     private String nomeCliente;
+
+    private Long idCliente;
 }

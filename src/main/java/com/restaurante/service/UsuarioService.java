@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 @AllArgsConstructor
-public class UsuarioService {
+public class UsuarioService implements UsuarioBase {
 
     private final UsuarioRepository usuarioRepository;
 
@@ -82,5 +82,9 @@ public class UsuarioService {
 
     public Long getIdByLogin(String login) {
         return usuarioRepository.getUsuarioByLogin(login);
+    }
+
+    public Long getIdEmpresaByLogin() {
+        return usuarioRepository.getIdEmpresaByLogin(getUsernameLogado());
     }
 }

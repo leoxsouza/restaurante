@@ -63,14 +63,14 @@ public class DividaClienteService implements UsuarioBase {
     }
 
     public DividaCliente findByClienteId(Long clienteId) {
-
-        //TODO Buscar tbm pelo usuarioEmpresa
-
-        return dividaClienteRepository.findByUsuarioClienteId(clienteId);
+        Long idEmpresa = usuarioService.getIdEmpresaByLogin();
+        return dividaClienteRepository.findByUsuarioClienteIdAndUsuarioEmpresaPessoaEmpresaId(clienteId, idEmpresa);
     }
 
     public List<DividaClienteListDTO> listarDividas() {
         Long idUsuarioLogado = usuarioService.getIdByLogin(getUsernameLogado());
+
+        //TODO SALVAR O ID DA EMPRESA IVES DO ID DO USUARIO
         return dividaClienteRepository.listarDividas(idUsuarioLogado);
     }
 }

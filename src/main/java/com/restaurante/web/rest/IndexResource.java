@@ -49,6 +49,7 @@ public class IndexResource {
 
     @PostMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Usuario> cadastrar(@RequestBody UsuarioDTO usuario) throws Exception {
+        //TODO NÃO ESTA SALVANDO EMPRESA
         log.info("Request para cadastrar usuário: {}", usuario.toString());
         return new ResponseEntity<>(usuarioService.cadastrar(usuario), HttpStatus.OK);
     }
