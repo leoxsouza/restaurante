@@ -21,4 +21,6 @@ public class PessoaDTO implements Serializable {
     private String cpf;
 
     private String nome;
+
+    private Long empresa;
 }

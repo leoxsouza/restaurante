@@ -68,9 +68,8 @@ public class DividaClienteService implements UsuarioBase {
     }
 
     public List<DividaClienteListDTO> listarDividas() {
-        Long idUsuarioLogado = usuarioService.getIdByLogin(getUsernameLogado());
+        Long idEmpresa = usuarioService.getIdEmpresaByLogin();
 
-        //TODO SALVAR O ID DA EMPRESA IVES DO ID DO USUARIO
-        return dividaClienteRepository.listarDividas(idUsuarioLogado);
+        return dividaClienteRepository.listarDividas(idEmpresa);
     }
 }

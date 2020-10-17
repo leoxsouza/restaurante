@@ -48,7 +48,14 @@ public class UsuarioService implements UsuarioBase {
     public Usuario cadastrar(UsuarioDTO usuarioDto) throws Exception {
         usuarioDto.setSenha(new BCryptPasswordEncoder().encode(usuarioDto.getSenha()));
         verificarUsuario(usuarioDto);
-        Usuario usuario = usuarioRepository.save(usuarioMapper.toEntity(usuarioDto));
+
+        Usuario usuario = usuarioMapper.toEntity(usuarioDto);
+
+        if (usuarioDto.getPessoa().getEmpresa() == null) {
+            usuario.getPessoa().setEmpresa(null);
+        }
+
+        usuario = usuarioRepository.save(usuario);
         salvarRoles(usuarioDto, usuario);
 
         return usuario;

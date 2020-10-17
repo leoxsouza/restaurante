@@ -16,6 +16,6 @@ public interface DividaClienteRepository extends JpaRepository<DividaCliente, Lo
 
     @Query("SELECT new com.restaurante.service.dto.DividaClienteListDTO(d.id, d.total, d.usuarioCliente.pessoa.nome, d.usuarioCliente.id) " +
             "FROM DividaCliente d " +
-            "WHERE d.usuarioEmpresa.id = :usuarioEmpresaId")
-    List<DividaClienteListDTO> listarDividas(@Param("usuarioEmpresaId") Long usuarioEmpresaId);
+            "WHERE d.usuarioEmpresa.pessoa.empresa.id = :idEmpresa")
+    List<DividaClienteListDTO> listarDividas(@Param("idEmpresa") Long idEmpresa);
 }
