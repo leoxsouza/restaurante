@@ -13,4 +13,5 @@
     <include file="config.liquibase/changelog/20201011071600_insert_tb_empresa.xml" relativeToChangelogFile="false"/>
     <include file="config.liquibase/changelog/20201011091200_insert_tb_role.xml" relativeToChangelogFile="false"/>
     <include file="config.liquibase/changelog/20201011092000_insert_tb_usuario.xml" relativeToChangelogFile="false"/>
+    <include file="config.liquibase/changelog/20201810103200_tb_produto.xml" relativeToChangelogFile="false"/>
 </databaseChangeLog>
