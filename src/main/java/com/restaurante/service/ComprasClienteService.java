@@ -3,12 +3,14 @@ package com.restaurante.service;
 import com.restaurante.domain.ComprasCliente;
 import com.restaurante.repository.ComprasClienteRepository;
 import com.restaurante.service.dto.ComprasClienteDTO;
+import com.restaurante.service.dto.ComprasClienteListDTO;
 import com.restaurante.service.mapper.ComprasClienteMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @Transactional
@@ -36,5 +38,9 @@ public class ComprasClienteService implements UsuarioBase {
     private void processamentoSalvar(ComprasCliente comprasCliente) {
         comprasCliente.setDataCompra(LocalDateTime.now());
         comprasCliente.setUsuarioEmpresa(usuarioService.findByLogin(getUsernameLogado()));
+    }
+
+    public List<ComprasClienteListDTO> getComprasPorEmpresa(Long idEmpresa) {
+        return comprasClienteRepository.getComprasPorUsuario(getUsernameLogado(), idEmpresa);
     }
 }

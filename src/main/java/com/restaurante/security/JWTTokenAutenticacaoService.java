@@ -1,29 +1,27 @@
 package com.restaurante.security;
 
-import com.restaurante.ApplicationContextLoad;
 import com.restaurante.domain.Usuario;
-import com.restaurante.repository.UsuarioRepository;
+import com.restaurante.service.UsuarioService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 @Component
+@RequiredArgsConstructor
 public class JWTTokenAutenticacaoService {
 
     private static final String SECRET = "DeliciasRest";
@@ -33,6 +31,8 @@ public class JWTTokenAutenticacaoService {
 
     @Value("${security.jwt.expiracao}")
     private String expiracao;
+
+    private final UsuarioService usuarioService;
 
 
     private Claims obterClaims(String token) throws ExpiredJwtException {
@@ -67,8 +67,19 @@ public class JWTTokenAutenticacaoService {
         Instant instant = dataHoraExpiracao.atZone(ZoneId.systemDefault()).toInstant();
         Date data = Date.from(instant);
 
+//        List<UsuariosRole> usuariosRoles = usuarioService.getRolesByLogin(usuario.getLogin());
+
+        usuario = usuarioService.findByLogin(usuario.getLogin());
+
+        List<String> rolesList = usuarioService.getRolesByLogin(usuario.getLogin());
+
+
+        Map<String, Object> roles = new HashMap<>();
+        roles.put("ROLES", rolesList);
+
         return Jwts
                 .builder()
+                .setClaims(roles)
                 .setSubject(usuario.getLogin())
                 .setExpiration(data)
                 .signWith(SignatureAlgorithm.HS512, chaveAssinatura)

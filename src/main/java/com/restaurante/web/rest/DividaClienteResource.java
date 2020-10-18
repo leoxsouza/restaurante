@@ -1,6 +1,7 @@
 package com.restaurante.web.rest;
 
 import com.restaurante.service.DividaClienteService;
+import com.restaurante.service.dto.ClienteDividaDTO;
 import com.restaurante.service.dto.DividaClienteDTO;
 import com.restaurante.service.dto.DividaClienteListDTO;
 import com.restaurante.service.dto.QuitarDividaDTO;
@@ -27,7 +28,7 @@ public class DividaClienteResource {
 
     @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<DividaClienteListDTO>> listarDividas() {
-        log.info("Request para listar as dívidas dos clientes");
+        log.info("Request para listar as dívidas dos clientes da empresa logada");
         return new ResponseEntity<>(dividaClienteService.listarDividas(), HttpStatus.OK);
     }
 
@@ -35,5 +36,11 @@ public class DividaClienteResource {
     public ResponseEntity<DividaClienteDTO> quitarDivida(@RequestBody QuitarDividaDTO quitarDividaDTO) {
         log.info("Request para quitar dívida do usuário: {}", quitarDividaDTO.getIdUsuarioCliente());
         return new ResponseEntity<>(dividaClienteService.quitarDivida(quitarDividaDTO), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/cliente", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<ClienteDividaDTO>> listarDividaPorCliente() {
+        log.info("Request para listar as dívidas do cliente logado");
+        return new ResponseEntity<>(dividaClienteService.listarDividaPorCliente(), HttpStatus.OK);
     }
 }

@@ -94,4 +94,8 @@ public class UsuarioService implements UsuarioBase {
     public Long getIdEmpresaByLogin() {
         return usuarioRepository.getIdEmpresaByLogin(getUsernameLogado());
     }
+
+    public List<String> getRolesByLogin(String login) {
+       return usuariosRoleRepository.getRolesByLogin(login);
+    }
 }

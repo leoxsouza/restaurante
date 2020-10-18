@@ -2,6 +2,7 @@ package com.restaurante.service;
 
 import com.restaurante.domain.DividaCliente;
 import com.restaurante.repository.DividaClienteRepository;
+import com.restaurante.service.dto.ClienteDividaDTO;
 import com.restaurante.service.dto.ComprasClienteDTO;
 import com.restaurante.service.dto.DividaClienteDTO;
 import com.restaurante.service.dto.DividaClienteListDTO;
@@ -71,5 +72,10 @@ public class DividaClienteService implements UsuarioBase {
         Long idEmpresa = usuarioService.getIdEmpresaByLogin();
 
         return dividaClienteRepository.listarDividas(idEmpresa);
+    }
+
+    public List<ClienteDividaDTO> listarDividaPorCliente() {
+        String login = getUsernameLogado();
+        return dividaClienteRepository.listarDividaPorCliente(login);
     }
 }

@@ -42,7 +42,7 @@ public class Usuario implements UserDetails {
     @Column(name = "DS_SENHA", nullable = false)
     private String senha;
 
-    @OneToMany(mappedBy = "id.usuario", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "id.usuario", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private List<UsuariosRole> roles;
 
     @Column(name = "DS_TOKEN")

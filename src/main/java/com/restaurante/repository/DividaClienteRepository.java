@@ -1,6 +1,7 @@
 package com.restaurante.repository;
 
 import com.restaurante.domain.DividaCliente;
+import com.restaurante.service.dto.ClienteDividaDTO;
 import com.restaurante.service.dto.DividaClienteListDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -18,4 +19,8 @@ public interface DividaClienteRepository extends JpaRepository<DividaCliente, Lo
             "FROM DividaCliente d " +
             "WHERE d.usuarioEmpresa.pessoa.empresa.id = :idEmpresa")
     List<DividaClienteListDTO> listarDividas(@Param("idEmpresa") Long idEmpresa);
+
+    @Query("SELECT new com.restaurante.service.dto.ClienteDividaDTO(d.id, d.total, d.usuarioEmpresa.pessoa.empresa.nome, d.usuarioEmpresa.pessoa.empresa.id) " +
+            "FROM DividaCliente d WHERE d.usuarioCliente.login = :login")
+    List<ClienteDividaDTO> listarDividaPorCliente(@Param("login") String login);
 }
