@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet author="leonardo.oliveira" id="20201810114900-1" labels="Criação da tabela SobraProduto">
+
+        <createSequence sequenceName="SQ_SOBRA_PRODUTO" startValue="1"/>
+
+        <createTable tableName="TB_SOBRA_PRODUTO" >
+
+            <column name="ID_SOBRA_PRODUTO" type="BIGINT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="QT_PESO" type="NUMBER(19, 2)"/>
+
+            <column name="QT_UNIDADE" type="BIGINT" />
+
+            <column name="DT_SOBRA" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="ID_PRODUTO" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="leonardo.oliveira" id="20201810114900-2">
+        <addForeignKeyConstraint
+                constraintName="FK_TB_SOBRA_TB_PROD"
+                baseColumnNames="ID_PRODUTO" baseTableName="TB_SOBRA_PRODUTO"
+                referencedColumnNames="ID_PRODUTO" referencedTableName="TB_PRODUTO"/>
+    </changeSet>
+
+</databaseChangeLog>
