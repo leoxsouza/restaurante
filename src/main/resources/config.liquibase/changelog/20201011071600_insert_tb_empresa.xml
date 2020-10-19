@@ -7,8 +7,8 @@
     <changeSet author="leonardo.oliveira" id="20201011071600-1">
 
         <sql>
-            INSERT INTO TB_EMPRESA (ID_EMPRESA, NU_CNPJ, DS_NOME) VALUES (1, '76319354000165', 'Restaurante');
-            INSERT INTO TB_EMPRESA (ID_EMPRESA, NU_CNPJ, DS_NOME) VALUES (2, '57940029000170', 'Lanchonete');
+            INSERT INTO TB_EMPRESA (ID_EMPRESA, NU_CNPJ, DS_NOME) VALUES (1, '76319354000165', 'Restaurante Dguste');
+            INSERT INTO TB_EMPRESA (ID_EMPRESA, NU_CNPJ, DS_NOME) VALUES (2, '57940029000170', 'Lanchonete Delícias');
         </sql>
 
     </changeSet>

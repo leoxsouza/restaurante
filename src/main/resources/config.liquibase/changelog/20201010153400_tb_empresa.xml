@@ -5,8 +5,9 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
     <changeSet author="leonardo.oliveira" id="20201007112200-1" labels="Criação da tabela Pessoa">
-
-        <createSequence sequenceName="SQ_EMPRESA" startValue="3"/>
+        <sql>
+            CREATE SEQUENCE SQ_EMPRESA START 3;
+        </sql>
 
         <createTable tableName="TB_EMPRESA" >
 

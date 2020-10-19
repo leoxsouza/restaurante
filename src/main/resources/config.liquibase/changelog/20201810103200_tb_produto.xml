@@ -6,7 +6,9 @@
 
     <changeSet author="leonardo.oliveira" id="20201810103200-1" labels="Criação da tabela Produto">
 
-        <createSequence sequenceName="SQ_PRODUTO" startValue="1"/>
+        <sql>
+            CREATE SEQUENCE SQ_PRODUTO START 1;
+        </sql>
 
         <createTable tableName="TB_PRODUTO" >
 

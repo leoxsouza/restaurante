@@ -7,7 +7,9 @@
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
     <changeSet id="00000000000000" author="jhipster">
-        <createSequence sequenceName="hibernate_sequence" startValue="1000" incrementBy="50"/>
+        <sql>
+            CREATE SEQUENCE hibernate_sequence START 1000 increment 50;
+        </sql>
     </changeSet>
 
     <!--

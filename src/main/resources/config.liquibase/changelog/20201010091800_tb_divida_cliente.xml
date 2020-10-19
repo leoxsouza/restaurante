@@ -5,7 +5,9 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
     <changeSet id="20201010091800-1" author="leonardo.oliveira">
-        <createSequence sequenceName="SQ_DIVIDA_CLIENTE"/>
+        <sql>
+            CREATE SEQUENCE SQ_DIVIDA_CLIENTE START 1;
+        </sql>
 
         <createTable tableName="TB_DIVIDA_CLIENTE">
             <column name="ID_DIVIDA_CLIENTE" type="BIGINT">

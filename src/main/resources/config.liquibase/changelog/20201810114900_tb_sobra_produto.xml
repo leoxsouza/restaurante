@@ -6,7 +6,9 @@
 
     <changeSet author="leonardo.oliveira" id="20201810114900-1" labels="Criação da tabela SobraProduto">
 
-        <createSequence sequenceName="SQ_SOBRA_PRODUTO" startValue="1"/>
+        <sql>
+            CREATE SEQUENCE SQ_SOBRA_PRODUTO START 1;
+        </sql>
 
         <createTable tableName="TB_SOBRA_PRODUTO" >
 

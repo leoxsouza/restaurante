@@ -6,7 +6,9 @@
 
     <changeSet author="leonardo.oliveira" id="20200911100900-1" labels="Criação da tabela Roles">
 
-        <createSequence sequenceName="SQ_ROLE"/>
+        <sql>
+            CREATE SEQUENCE SQ_ROLE START 1;
+        </sql>
 
         <createTable tableName="TB_ROLE" >
             <column name="ID_ROLE" type="BIGINT" >

@@ -6,7 +6,10 @@
 
     <changeSet author="leonardo.oliveira" id="20201007112200-1" labels="Criação da tabela Pessoa">
 
-        <createSequence sequenceName="SQ_PESSOA" startValue="2"/>
+        <sql>
+            CREATE SEQUENCE SQ_PESSOA START 2;
+        </sql>
+
 
         <createTable tableName="TB_PESSOA" >
 

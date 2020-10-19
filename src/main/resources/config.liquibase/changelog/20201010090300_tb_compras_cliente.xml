@@ -6,7 +6,9 @@
 
     <changeSet author="leonardo.oliveira" id="20201010090300-1" labels="Criação da tabela Compras Cliente">
 
-        <createSequence sequenceName="SQ_COMPRAS_CLIENTE"/>
+        <sql>
+            CREATE SEQUENCE SQ_COMPRAS_CLIENTE START 1;
+        </sql>
 
         <createTable tableName="TB_COMPRAS_CLIENTE" >
 

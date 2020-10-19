@@ -6,7 +6,9 @@
 
     <changeSet author="leonardo.oliveira" id="20200910093800-1" labels="Criação da tabela de usuario">
 
-        <createSequence sequenceName="SQ_USUARIO" startValue="2"/>
+        <sql>
+            CREATE SEQUENCE SQ_USUARIO START 2;
+        </sql>
 
         <createTable tableName="TB_USUARIO" >
 
