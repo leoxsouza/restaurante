@@ -43,6 +43,9 @@ public class Pessoa implements Serializable {
     @Column(name = "DS_NOME", nullable = false)
     private String nome;
 
+    @Column(name = "NU_CELULAR")
+    private String celular;
+
     @ManyToOne
     @JoinColumn(name = "ID_EMPRESA")
     private Empresa empresa;

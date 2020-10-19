@@ -15,4 +15,5 @@
     <include file="config.liquibase/changelog/20201011092000_insert_tb_usuario.xml" relativeToChangelogFile="false"/>
     <include file="config.liquibase/changelog/20201810103200_tb_produto.xml" relativeToChangelogFile="false"/>
     <include file="config.liquibase/changelog/20201810114900_tb_sobra_produto.xml" relativeToChangelogFile="false"/>
+    <include file="config.liquibase/changelog/20201910184400_add_column_tb_pessoa.xml" relativeToChangelogFile="false"/>
 </databaseChangeLog>

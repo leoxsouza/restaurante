@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet author="leonardo.oliveira" id="20201810114900-1" labels="Add column tb pessoa">
+
+        <addColumn tableName="TB_PESSOA">
+            <column name="NU_CELULAR" type="VARCHAR(15)" />
+        </addColumn>
+
+    </changeSet>
+
+</databaseChangeLog>
