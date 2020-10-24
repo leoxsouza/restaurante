@@ -67,8 +67,6 @@ public class JWTTokenAutenticacaoService {
         Instant instant = dataHoraExpiracao.atZone(ZoneId.systemDefault()).toInstant();
         Date data = Date.from(instant);
 
-//        List<UsuariosRole> usuariosRoles = usuarioService.getRolesByLogin(usuario.getLogin());
-
         usuario = usuarioService.findByLogin(usuario.getLogin());
 
         List<String> rolesList = usuarioService.getRolesByLogin(usuario.getLogin());

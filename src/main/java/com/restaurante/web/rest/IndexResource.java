@@ -68,7 +68,7 @@ public class IndexResource {
     }
 
     @PostMapping("/login")
-    public TokenDTO autenticar(@RequestBody CredenciaisDTO credenciais) {
+    public TokenDTO autenticar(@RequestBody CredenciaisDTO credenciais) throws Exception {
         log.info("Request para fazer o login");
         try {
             Usuario usuario = usuarioMapper.toEntity(credenciais);

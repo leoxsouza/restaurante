@@ -2,7 +2,6 @@ package com.restaurante.service;
 
 import com.restaurante.domain.Usuario;
 import com.restaurante.domain.UsuariosRole;
-import com.restaurante.exception.SenhaInvalidaException;
 import com.restaurante.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -60,7 +59,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return userDetails;
     }
 
-    public UserDetails autenticar(Usuario usuario) {
+    public UserDetails autenticar(Usuario usuario) throws Exception {
         UserDetails userDetails = loadUserByUsername(usuario.getLogin());
         boolean senhasBatem = new BCryptPasswordEncoder().matches(usuario.getSenha(), userDetails.getPassword());
 
@@ -68,6 +67,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             return userDetails;
         }
 
-        throw new SenhaInvalidaException();
+        throw new Exception("#iex Senha incorreta #fex");
     }
 }

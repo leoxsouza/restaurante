@@ -3,7 +3,6 @@ package com.restaurante.service;
 import com.restaurante.domain.Usuario;
 import com.restaurante.domain.UsuariosRole;
 import com.restaurante.domain.UsuariosRolePK;
-import com.restaurante.exception.SenhaInvalidaException;
 import com.restaurante.repository.UsuarioRepository;
 import com.restaurante.repository.UsuariosRoleRepository;
 import com.restaurante.service.dto.DropDownDTO;
@@ -70,10 +69,9 @@ public class UsuarioService implements UsuarioBase {
         usuariosRoleRepository.save(usuariosRole);
     }
 
-    private void verificarUsuario(UsuarioDTO usuario) {
+    private void verificarUsuario(UsuarioDTO usuario) throws Exception {
         if (usuario.getId() == null && usuarioRepository.existsByLoginIgnoreCase(usuario.getLogin())) {
-            //TODO criar parametrized exception
-            throw new SenhaInvalidaException();
+            throw new Exception("#iex Já existe um usuário com esse Login, favor escolher outro login! #fex");
         }
 
         // TODO verificar Cpf
